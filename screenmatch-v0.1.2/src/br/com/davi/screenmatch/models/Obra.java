@@ -1,7 +1,6 @@
 package br.com.davi.screenmatch.models;
 
 import br.com.davi.screenmatch.exceptions.ErroConversaoAnoException;
-import com.google.gson.annotations.SerializedName;
 
 public abstract class Obra implements Comparable<Obra>{
     private String title;
