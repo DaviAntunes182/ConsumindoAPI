@@ -1,7 +1,6 @@
 package br.com.davi.screenmatch.main;
 
 import br.com.davi.screenmatch.models.Filme;
-import br.com.davi.screenmatch.models.Obra;
 import br.com.davi.screenmatch.models.ObraOMDB;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -33,11 +32,9 @@ public class ConsumindoAPI {
 
         String json = response.body();
 
-        //Alterando a política de nomenclatura dos campos(chaves) que vem no json
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
                 .create();
-        //Criamos um record compatível com o retorno do json após configurada a política de chaves
         ObraOMDB obraOMDB = gson.fromJson(json, ObraOMDB.class);
         Filme meuFilme = new Filme(obraOMDB);
         System.out.println(meuFilme);
