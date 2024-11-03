@@ -1,5 +1,6 @@
 package br.com.davi.screenmatch.main;
 
+import br.com.davi.screenmatch.exceptions.ErroConversaoAnoException;
 import br.com.davi.screenmatch.models.Filme;
 import br.com.davi.screenmatch.models.ObraOMDB;
 import com.google.gson.FieldNamingPolicy;
@@ -36,7 +37,11 @@ public class ConsumindoAPI {
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
                 .create();
         ObraOMDB obraOMDB = gson.fromJson(json, ObraOMDB.class);
-        Filme meuFilme = new Filme(obraOMDB);
-        System.out.println(meuFilme);
+        try {
+            Filme meuFilme = new Filme(obraOMDB);
+            System.out.println(meuFilme);
+        }catch (NumberFormatException | ErroConversaoAnoException ex) {
+            System.out.println("Ocorreu um erro -> " + ex.getMessage());
+        }
     }
 }

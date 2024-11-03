@@ -14,7 +14,7 @@ public class Filme extends Obra implements Classificavel {
     }
 
     public Filme(ObraOMDB obraOMDB) {
-        super(obraOMDB.title(), Integer.valueOf(obraOMDB.year()));
+        super(obraOMDB);
         this.setDuration(Integer.valueOf(obraOMDB.runtime().substring(0, obraOMDB.runtime().indexOf(" "))));
     }
 

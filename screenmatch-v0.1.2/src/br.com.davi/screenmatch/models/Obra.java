@@ -1,12 +1,10 @@
 package br.com.davi.screenmatch.models;
 
+import br.com.davi.screenmatch.exceptions.ErroConversaoAnoException;
 import com.google.gson.annotations.SerializedName;
 
 public abstract class Obra implements Comparable<Obra>{
-    //Transformando dados
-    @SerializedName("Title")
     private String title;
-    @SerializedName("Year")
     private Integer year;
     private boolean noPlano;
     private double stars;
@@ -16,6 +14,15 @@ public abstract class Obra implements Comparable<Obra>{
     public Obra(String title, Integer year) {
         this.title = title;
         this.year = year;
+    }
+
+    public Obra(ObraOMDB obraOMDB) {
+        this.title = obraOMDB.title();
+        if(obraOMDB.year().length() > 4){
+            throw new ErroConversaoAnoException("Não foi possível converter o ano do objeto passado no construtor");
+        }else{
+            this.year = Integer.valueOf(obraOMDB.year());
+        }
     }
 
     public void avalia(double nota){
